@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script
+      src="https://kit.fontawesome.com/eec6b2c650.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="face.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="konva.min.js"></script>
+  </head>
+
+  <body>
+    <main>
+      <div id="overlay" class="overlay">
+        <!-- Modal content -->
+        <div class="modal">
+          <!-- Default Emoji -->
+          <div id="emojiContainer" class="emoji shake-lr">😖</div>
+          <p>هل انت متأكد من حذف جميع الرسمات؟</p>
+          <!-- Buttons -->
+          <button
+            class="buttonn jello-horizontal"
+            onclick="handleQuit()"
+            onmouseover="showEmoji('😊')"
+            onmouseout="resetEmoji()"
+          >
+            لا
+          </button>
+          <button
+            class="buttonn jello-horizontal"
+            onclick="handleOkay()"
+            onmouseover="showEmoji('😭')"
+            onmouseout="resetEmoji()"
+          >
+            نعم
+          </button>
+        </div>
+      </div>
+
+      <div class="nameinput">
+        <input
+          style="margin-top: 3px"
+          type="text"
+          autocomplete="on"
+          id="nameInput"
+          class="input"
+          placeholder="أدخل أسمك"
+        />
+        <p id="alertMasseges" style="display: none">
+          <strong> تنبيه</strong>:الرجاء قم بأدخال أسمك
+        </p>
+        <p id="alertMasseges2" style="display: none">
+          <strong> تنبيه</strong>:هاذا الاسم موجود مسبقا
+        </p>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn bounce-top-r">الرسمات السابقة</button>
+        <div class="dropdown-content">
+          <!-- <i class="fa-regular fa-circle-xmark "></i> -->
+        </div>
+      </div>
+      <div class="clearData">
+        <button class="claerBtn bounce-top" onclick="showOverlay()">
+          حذف جميع الرسمات
+          <i
+            class="fa-regular fa-circle-xmark fa-lg"
+            style="color: #000000"
+          ></i>
+        </button>
+      </div>
+
+      <!-- <button class="button" id="btnBack" style="left: 25em; top: 1em;">العودة</button> -->
+
+      <section class="layout">
+        <img
+          class="human slide-in-fwd-left"
+          id="female"
+          src="imges/femaleMain.png"
+          alt="notload"
+        />
+        <img
+          class="human slide-in-fwd-right"
+          id="male"
+          src="imges/maleMain.png"
+          alt="notload"
+        />
+      </section>
+      <div class="sideImges">
+        <img
+          src=""
+          id="sideImges0"
+          class="sideCenterImge"
+          alt=""
+          style="display: none"
+        />
+        <img
+          src=""
+          id="sideImges1"
+          class="sideCenterImge"
+          alt=""
+          style="display: none"
+        />
+        <img
+          src=""
+          id="sideImges2"
+          class="sideCenterImge"
+          alt=""
+          style="display: none"
+        />
+        <img
+          src=""
+          id="sideImges3"
+          class="sideCenterImge"
+          alt=""
+          style="display: none"
+        />
+      </div>
+      <div id="showFaceCreate" class="showFaceCreate" style="display: none">
+        <div class="btns">
+          <button class="button" id="btn" style="left: 2.2em">
+            كون الشخصية
+          </button>
+          <button class="button" id="btnBack" style="top: 6.5em">العودة</button>
+        </div>
+        <!-- <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 64 64"
+          id="svgs"
+          aria-labelledby="title"
+          aria-describedby="desc"
+          role="img"
+          width=100
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        
+        >
+          <path
+            data-name="layer2"
+            d="M63.1 30.9C62.6 30.1 50 12.5 32 12.5S1.4 30.1.9 30.9L.1 32l.8 1.1c.5.8 13.1 18.4 31.1 18.4s30.6-17.6 31.1-18.4l.8-1.1zM32 47.5C18.5 47.5 8 35.8 5 32c3-3.8 13.5-15.5 27-15.5S56 28.2 59 32c-3 3.8-13.5 15.5-27 15.5z"
+            fill="#000"
+          ></path>
+          <path
+            id="EYECOLOR"
+            data-name="layer1"
+            d="M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z"
+            fill="#003671"
+          ></path>
+        </svg> -->
+
+        <img class="maleRightEye" id="image0" src="" style="display: none" />
+        <img class="maleLeftEye" id="image1" src="" style="display: none" />
+        <img class="maleMouth" id="image2" src="" style="display: none" />
+        <img class="maleNoise" id="image3" src="" style="display: none" />
+        <img class="mouth1" id="image4" src="" style="display: none" />
+        <img class="mouth2" id="image5" src="" style="display: none" />
+        <img class="happyEyeleft" id="image6" src="" style="display: none" />
+        <img class="happyEyeright" id="image7" src="" style="display: none" />
+        <img class="engryeye1" id="image8" src="" style="display: none" />
+        <img class="engryeye2" id="image9" src="" style="display: none" />
+
+        <img id="centerImage" src="" style="display: none" />
+
+        <label for="colorPicker">Choose a color:</label>
+        <input type="color" id="colorPicker" />
+        <div id="container"></div>
+      </div>
+    </main>
+    <script src="face.js"></script>
+  </body>
+</html>

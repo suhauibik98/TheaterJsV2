@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css.css" />
+
+    <script src="../konva.min.js"></script>
+    
+    <script
+      src="https://kit.fontawesome.com/eec6b2c650.js"
+      crossorigin="anonymous"
+    ></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div id="container"></div>
+
+    <div id="newShape"></div>
+
+
+
+    <p id="pHidenafter2s" >&#128526; أحسنت ! قم بتحريك الشخصية </p>
+    <div id="pullimges">
+      <img class="maleRightEye" id="image0" src="" style="display: none" />
+      <img class="maleLeftEye" id="image1" src="" style="display: none" />
+      <img class="maleMouth" id="image2" src="" style="display: none" />
+      <img class="maleNoise" id="image3" src="" style="display: none" />
+      <img class="mouth1" id="image4" src="" style="display: none" />
+      <img class="mouth2" id="image5" src="" style="display: none" />
+      <img class="happyEyeleft" id="image6" src="" style="display: none" />
+      <img class="happyEyeright" id="image7" src="" style="display: none" />
+      <img class="engryeye1" id="image8" src="" style="display: none" />
+      <img class="engryeye2" id="image9" src="" style="display: none" />
+    </div>
+    <img id="centerImage" src="" style="display: none" />
+    <button id="reload" class="button reload">
+      إعادة <i class="fa-solid fa-repeat"></i>
+    </button>
+
+
+    <button id="ij" class="capture button" onclick="capture()">
+      احفظ الصورة <i class="fa-solid fa-download"></i>
+    </button>
+
+    <button id="AddnewShap" class="AddnewShap button">
+      احفظ الشخصية<i class="fa-solid fa-download"></i>
+    </button>
+    <button class="button" id="btnBack" style="position: absolute;
+    left: 29em;
+    top: 2em;">العودة</button>
+    <script src="html2canvas.min.js"></script>
+    <script src="js.js"></script>
+  </body>
+</html>
