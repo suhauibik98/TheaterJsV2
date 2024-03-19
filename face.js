@@ -19,6 +19,7 @@ var btnBack = document.querySelectorAll("#btnBack");
 // console.log(svgimages.getAttribute("src"));
 // const EYECOLOR = document.getElementById("EYECOLOR")
 // EYECOLOR.setAttribute( "style","fill:red")
+// Wait for the document to be fully loaded
 
 var totalimages = [];
 
@@ -192,7 +193,7 @@ function konva() {
   var selectedColor;
 
   colorPicker.addEventListener("input", changeColor);
-  var selectedColor = "#fff";
+  var selectedColor = "";
   function changeColor() {
     selectedColor = colorPicker.value;
     // console.log(selectedColor);
@@ -231,7 +232,7 @@ function konva() {
       data: pathData,
       fill: 'transparent',
       stroke: 'black',
-      strokeWidth: 1
+      strokeWidth: 0.2
     });
 
     if (index === 1) {
@@ -250,8 +251,8 @@ function updateImageColors(color) {
         layer.batchDraw();
       });
     }
-  // for (var i = 0; i < 10; i++) {
-  for (var i = 0; i < 0; i++) {
+  for (var i = 0; i < 10; i++) {
+  // for (var i = 0; i < 0; i++) {
     var image = new Konva.Image({
       id: document.getElementById("image" + i).className,
       x: i + 1 * 100,
@@ -259,16 +260,18 @@ function updateImageColors(color) {
       // width: 45,
       //  height: 38,
       fill: selectedColor,
-      stroke:"red",
+      // stroke:"red",
       draggable: true,
       image: document.getElementById("image" + i),
     });
-    console.log(image.attrs);
+    // console.log(image.attrs);
   
     // image.add(path)
 
-    // console.log(image);
+    console.log(image.contentDocument);
     // totalimages.push(image)
+
+
 
     
     if (i == 0) {
@@ -276,6 +279,8 @@ function updateImageColors(color) {
       image.attrs.x = 100;
      
       totalimages.push(image);
+      console.log(image);
+
 
     }
     if (i == 1) {
