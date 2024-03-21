@@ -190,7 +190,7 @@ function konva() {
   }
 
   var colorPicker = document.getElementById("colorPicker");
-  var selectedColor="#fff";
+  var selectedColor = "#fff";
 
   colorPicker.addEventListener("input", changeColor);
   function changeColor() {
@@ -200,89 +200,102 @@ function konva() {
     // updateImageColors(selectedColor); // Update the fill color of the images
   }
 
-  
-  for(let i = 0 ; i<2 ; i++){
-
-  var group = new Konva.Group({
-    id:"maleRightEye",
-    x:10,
-    y:200,
-    draggable: true,
-  });
-  layer.add(group)
-
- var roundEye = new Konva.Path({
-    data: "M63.1 30.9C62.6 30.1 50 12.5 32 12.5S1.4 30.1.9 30.9L.1 32l.8 1.1c.5.8 13.1 18.4 31.1 18.4s30.6-17.6 31.1-18.4l.8-1.1zM32 47.5C18.5 47.5 8 35.8 5 32c3-3.8 13.5-15.5 27-15.5S56 28.2 59 32c-3 3.8-13.5 15.5-27 15.5z",
-    fill:"#000"
-
-  })
-group.add(roundEye)
-
-  var InsideEye = new Konva.Path({
-    data: "M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z",
-    // fill:selectedColor,
-  })
-  
-  group.add(InsideEye)
-    //  totalimages.push(InsideEye)
-
- InsideEye.on("click",(p,i)=>{
-   totalimages.push(InsideEye)
-   selectedColor = colorPicker.value;
-   InsideEye.fill(selectedColor); // Change fill color
-   layer.draw(); // Redraw layer
-console.log(p,totalimages);
-
- })
-
- group.on("dragend", function (e) {
-  // Save the position of the image
-  //  this.scaleX;
-  console.log(e);
-  // imagePositions.push(group)
-  if (imagePositions.length) {
-    for (let i = 1; i < imagePositions.length + 1; i++) {
-      if (e.target.children[i-1] == imagePositions[i]?.id) {
-        imagePositions.splice(i, 1);
-      }
-    }
-    imagePositions.push({
-      id: this.id(),
-      x: this.x(),
-      y: this.y(),
-    });
-    localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
-  } else {
-    console.log("init");
-    imagePositions.push(n.gender);
-    imagePositions.push({
-      id: this.id(),
-      x: this.x(),
-      y: this.y(),
-    });
-    localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
+  const shap = {
+    round:"M63.1 30.9C62.6 30.1 50 12.5 32 12.5S1.4 30.1.9 30.9L.1 32l.8 1.1c.5.8 13.1 18.4 31.1 18.4s30.6-17.6 31.1-18.4l.8-1.1zM32 47.5C18.5 47.5 8 35.8 5 32c3-3.8 13.5-15.5 27-15.5S56 28.2 59 32c-3 3.8-13.5 15.5-27 15.5z",
+    inside:"M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z"
   }
-});
+
+  for (let i = 0; i < 2; i++) {
+    var group = new Konva.Group({
+      id: "shapSVG" + i,
+      x: 10,
+      y: 200,
+      draggable: true,
+    });
+
+    var roundEye = new Konva.Path({
+      id: "round" + i,
+      data: shap.round,
+      fill: "#000",
+    });
+    group.add(roundEye);
+
+    var InsideEye = new Konva.Path({
+      id: "inside" + i,
+      data:shap.inside,
+      fill:"#fff",
+    });
+
+    group.add(InsideEye);
+    //  totalimages.push(InsideEye)
+    totalimages.push({InsideEye, selectedColor });
+
+    group.on("click", (p) => {
+      // selectedColor = colorPicker.value;
+      p.target.fill(selectedColor);
+      console.log( p.target.attrs.fill); // Change fill color
+      console.log( p.target.attrs.id); // Change fill color
+      layer.draw(); // Redraw layer
+      // console.log(totalimages,p);
+    });
+
+    group.on("dragend", function (e) {
+      // Save the position of the image
+      //  this.scaleX;
+      // console.log(e);
+      // imagePositions.push(group)
+      console.log(e);
+      if (imagePositions.length) {
+        for (let i = 1; i < imagePositions.length + 1; i++) {
+          if (e.target.attrs.id == imagePositions[i]?.id) {
+            imagePositions.splice(i, 1);
+          }
+        }
+        imagePositions.push({
+          id: this.id(),
+          x: this.x(),
+          y: this.y(),
+          round:roundEye.id(),
+          roundFill:roundEye.fill(),
+          inside:InsideEye.id(),
+          insideFill:InsideEye.fill(),
+
+          
+        });
+        localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
+      } else {
+        console.log("init");
+        imagePositions.push(n.gender);
+        imagePositions.push({
+          id: this.id(),
+          x: this.x(),
+          y: this.y(),
+          round:roundEye.id(),
+          roundFill:roundEye.fill(),
+          inside:InsideEye.id(),
+          insideFill:InsideEye.fill(),
+        });
+        localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
+      }
+    });
+    layer.add(group);
 
   }
 
   layer.draw();
 
   // var svgPaths = [
-    
+
   //   `<svg >
-    
+
   //     <path data-name="layer2"
   //     d="M63.1 30.9C62.6 30.1 50 12.5 32 12.5S1.4 30.1.9 30.9L.1 32l.8 1.1c.5.8 13.1 18.4 31.1 18.4s30.6-17.6 31.1-18.4l.8-1.1zM32 47.5C18.5 47.5 8 35.8 5 32c3-3.8 13.5-15.5 27-15.5S56 28.2 59 32c-3 3.8-13.5 15.5-27 15.5z"
   //     fill="#000"></path>
   //     <path id="EYECOLOR" data-name="layer1" d="M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z"
   //     fill="#003671"></path>
   //   </svg>`
-  
+
   // ];
-
- 
-
 
   // svgPaths.forEach((pathData, index)=> {
   //   var path = new Konva.Path({
@@ -298,23 +311,22 @@ console.log(p,totalimages);
   //   // console.log(path);
   //   if (index === 0) {
   //     totalimages.push(path)
-  //     path.fill(selectedColor); 
+  //     path.fill(selectedColor);
   //   }
 
   //   group.add(path);
-    
-    
+
   // });
-function updateImageColors(color) {
-      // console.log(totalimages);
-      totalimages.forEach((image) => {
-        image.fill(color);
-        layer.batchDraw();
-      });
-    }
-    
+  // function updateImageColors(color) {
+  //   // console.log(totalimages);
+  //   totalimages.forEach((image) => {
+  //     image.fill(color);
+  //     layer.batchDraw();
+  //   });
+  // }
+
   for (var i = 0; i < 10; i++) {
-  // for (var i = 0; i < 0; i++) {
+    // for (var i = 0; i < 0; i++) {
 
     var image = new Konva.Image({
       id: document.getElementById("image" + i).className,
@@ -322,29 +334,24 @@ function updateImageColors(color) {
       y: 400,
       // width: 45,
       //  height: 38,
-      fill: selectedColor,
+      // fill: selectedColor,
       // stroke:"red",
       draggable: true,
       image: document.getElementById("image" + i),
     });
     // console.log(image.attrs);
-  
+
     // image.add(path)
 
     // console.log(image.contentDocument);
     // totalimages.push(image)
 
-
-
-    
     if (i == 0) {
       image.attrs.y = 265;
       image.attrs.x = 100;
-     
+
       totalimages.push(image);
       // console.log(image);
-
-
     }
     if (i == 1) {
       image.attrs.y = 265;
@@ -422,7 +429,7 @@ function updateImageColors(color) {
     image.on("mouseout", function () {
       document.body.style.cursor = "default";
     });
-    
+
     layer.add(image);
   }
   // var path = new Konva.Path({
