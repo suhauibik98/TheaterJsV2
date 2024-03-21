@@ -140,7 +140,6 @@ inPostion.forEach((pos) => {
     id: pos.id,
     x: pos.x,
     y: pos.y,
-    fill:"red",
     // width: 45,
     // height: 38,
     draggable: false,

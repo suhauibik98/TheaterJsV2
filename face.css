@@ -50,14 +50,16 @@ main {
 }
 
 .human:hover {
-  filter: drop-shadow(0mm 0mm 3mm rgb(252, 70, 125));
+  filter: drop-shadow(0mm 0mm 6mm #ffffff);
 
 }
 
 /*************doupdown********/
-svg{
+svg > #EYECOLOR{
   /* position: relative;
   top: 10em; */
+  background-color: #2a93e8;
+  /* fill: #2ae843; */
   width: 20px;
 }
 
