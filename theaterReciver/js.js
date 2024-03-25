@@ -10,11 +10,11 @@ var choiseGender = localStorage.getItem("choiseGender");
 var pHidenafter2s = document.getElementById("pHidenafter2s");
 var AddnewShap = document.getElementById("AddnewShap");
 var path = `../imges/${inPostion[0].gender}/gender.png`;
-var btnBack = document.querySelector("#btnBack");
+// var btnBack = document.querySelector("#btnBack");
 
-btnBack.addEventListener("click", () => {
-  window.location.href = "../index.html";
-});
+// btnBack.addEventListener("click", () => {
+//   window.location.href = "../index.html";
+// });
 
 reload.addEventListener("click", () => {
   window.location.href = "../index.html";
@@ -57,7 +57,7 @@ centerImge.src = `../${inPostion[0].custum_url}`;
 imgs.forEach((img, i) => {
   switch (i) {
     case 0:
-      img.src = `../imges/${inPostion[0].gender}/RightEye.svg`;
+      img.src = `../imges/${inPostion[0].gender}/RightEye.png`;
       break;
     case 1:
       img.src = `../imges/${inPostion[0].gender}/LeftEye.png`;
@@ -133,6 +133,36 @@ var renderImgecenter = new Konva.Image({
   image: centerImge,
 });
 layer.add(renderImgecenter);
+// inPostion.shift()
+inPostion.forEach((event,index)=>{
+if(event.id){
+  console.log(event);
+  var group = new Konva.Group({
+    id: event.id,
+    x: event.x,
+    y: event.y,
+    draggable: false,
+  });
+  layer.add(group);
+  console.log(group);
+
+  var roundEye = new Konva.Path({
+    id: event.round,
+    data: event.roundData,
+    fill: event.roundFill,
+  });
+  group.add(roundEye);
+
+  var InsideEye = new Konva.Path({
+    id: event.inside,
+    data: event.insideData,
+    fill: event.insideFill,
+  });
+
+  group.add(InsideEye);
+  
+  }
+})
 
 var renderImge;
 inPostion.forEach((pos) => {

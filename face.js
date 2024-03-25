@@ -74,7 +74,7 @@ human.forEach((h) => {
     imgs.forEach((img, i) => {
       switch (i) {
         case 0:
-          img.src = `imges/${n.gender}/RightEye.svg`;
+          img.src = `imges/${n.gender}/RightEye.png`;
           //  img.style.fill("red")
           // console.log(img.style.fill);
           break;
@@ -200,89 +200,216 @@ function konva() {
     // updateImageColors(selectedColor); // Update the fill color of the images
   }
 
-  const shap = {
-    round:"M63.1 30.9C62.6 30.1 50 12.5 32 12.5S1.4 30.1.9 30.9L.1 32l.8 1.1c.5.8 13.1 18.4 31.1 18.4s30.6-17.6 31.1-18.4l.8-1.1zM32 47.5C18.5 47.5 8 35.8 5 32c3-3.8 13.5-15.5 27-15.5S56 28.2 59 32c-3 3.8-13.5 15.5-27 15.5z",
-    inside:"M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z"
-  }
+  const shape = [
+    {
+      round:
+        "M63.1 30.9C62.6 30.1 50 12.5 32 12.5S1.4 30.1.9 30.9L.1 32l.8 1.1c.5.8 13.1 18.4 31.1 18.4s30.6-17.6 31.1-18.4l.8-1.1zM32 47.5C18.5 47.5 8 35.8 5 32c3-3.8 13.5-15.5 27-15.5S56 28.2 59 32c-3 3.8-13.5 15.5-27 15.5z",
+      inside:
+        "M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z",
+    },
+    {
+      round:
+        "M63.1 30.9C62.6 30.1 50 12.5 32 12.5S1.4 30.1.9 30.9L.1 32l.8 1.1c.5.8 13.1 18.4 31.1 18.4s30.6-17.6 31.1-18.4l.8-1.1zM32 47.5C18.5 47.5 8 35.8 5 32c3-3.8 13.5-15.5 27-15.5S56 28.2 59 32c-3 3.8-13.5 15.5-27 15.5z",
+      inside:
+        "M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z",
+    },
+    {
+      round:
+        "M14.16,70.81s6.4,1.01,15.52-2.95c62.87,14.96,104.8,7.3,127.32-5.73C139.26,13.2,106.8-.68,53.51,26.48,18.03,44.61,10.48,70.67,14.16,70.81Z",
+      inside:
+        "M88.82,5.09c-19.17,0-34.71,15.54-34.71,34.71s15.54,34.71,34.71,34.71,34.71-15.54,34.71-34.71S108,5.09,88.82,5.09Z",
+    },
+  ];
+  // const shap1 = {
+  //   round:"M63.1 30.9C62.6 30.1 50 12.5 32 12.5S1.4 30.1.9 30.9L.1 32l.8 1.1c.5.8 13.1 18.4 31.1 18.4s30.6-17.6 31.1-18.4l.8-1.1zM32 47.5C18.5 47.5 8 35.8 5 32c3-3.8 13.5-15.5 27-15.5S56 28.2 59 32c-3 3.8-13.5 15.5-27 15.5z",
+  //   inside:"M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z"
+  // }
 
-  for (let i = 0; i < 2; i++) {
-    var group = new Konva.Group({
-      id: "shapSVG" + i,
-      x: 10,
-      y: 200,
-      draggable: true,
-    });
+  for (let i = 0; i < shape.length; i++) {
+    (function (i) {
+      var groupId = "shapSVG" + i; // Generate unique group ID
 
-    var roundEye = new Konva.Path({
-      id: "round" + i,
-      data: shap.round,
-      fill: "#000",
-    });
-    group.add(roundEye);
+      var group = new Konva.Group({
+        id: groupId,
+        x: 80 + i * 180,
+        y: 500,
+        draggable: true,
+      });
+      layer.add(group);
+      var roundEye = new Konva.Path({
+        id: "round" + i,
+        data: shape[i].round,
+        fill: "#000",
+      });
+      group.add(roundEye);
 
-    var InsideEye = new Konva.Path({
-      id: "inside" + i,
-      data:shap.inside,
-      fill:"#fff",
-    });
+      var InsideEye = new Konva.Path({
+        id: "inside" + i,
+        data: shape[i].inside,
+        fill: "#fff",
+      });
 
-    group.add(InsideEye);
-    //  totalimages.push(InsideEye)
-    totalimages.push({InsideEye, selectedColor });
+      group.add(InsideEye);
+      //  totalimages.push(InsideEye)
+      totalimages.push({ InsideEye, selectedColor });
 
-    group.on("click", (p) => {
-      // selectedColor = colorPicker.value;
-      p.target.fill(selectedColor);
-      console.log( p.target.attrs.fill); // Change fill color
-      console.log( p.target.attrs.id); // Change fill color
-      layer.draw(); // Redraw layer
-      // console.log(totalimages,p);
-    });
+      group.on("click", (p) => {
+        // selectedColor = colorPicker.value;
 
-    group.on("dragend", function (e) {
-      // Save the position of the image
-      //  this.scaleX;
-      // console.log(e);
-      // imagePositions.push(group)
-      console.log(e);
-      if (imagePositions.length) {
-        for (let i = 1; i < imagePositions.length + 1; i++) {
-          if (e.target.attrs.id == imagePositions[i]?.id) {
-            imagePositions.splice(i, 1);
+        p.target.fill(selectedColor);
+        // p.target.stroke();
+        console.log(roundEye); // Change fill color
+        console.log(p.target.attrs.id); // Change fill color
+        layer.draw(); // Redraw layer
+        // console.log(totalimages,p);
+
+        if (imagePositions.length) {
+          for (let i = 1; i < imagePositions.length + 1; i++) {
+            if (group.attrs.id == imagePositions[i]?.id) {
+              imagePositions.splice(i, 1);
+            }
           }
+          imagePositions.push({
+            id: group.attrs.id,
+            x: group.attrs.x,
+            y: group.attrs.y,
+            round: roundEye.id(),
+            roundFill: roundEye.fill(),
+            roundData: roundEye.data(),
+            inside: InsideEye.id(),
+            insideFill: InsideEye.fill(),
+            insideData: InsideEye.data(),
+          });
+          localStorage.setItem(
+            "imagePositions",
+            JSON.stringify(imagePositions)
+          );
+        } else {
+          console.log("init");
+          imagePositions.push(n.gender);
+          imagePositions.push({
+            id: group.attrs.id,
+            x: group.attrs.x,
+            y: group.attrs.y,
+            round: roundEye.id(),
+            roundFill: roundEye.fill(),
+            roundData: roundEye.data(),
+            inside: InsideEye.id(),
+            insideFill: InsideEye.fill(),
+            insideData: InsideEye.data(),
+          });
+          localStorage.setItem(
+            "imagePositions",
+            JSON.stringify(imagePositions)
+          );
         }
-        imagePositions.push({
-          id: this.id(),
-          x: this.x(),
-          y: this.y(),
-          round:roundEye.id(),
-          roundFill:roundEye.fill(),
-          inside:InsideEye.id(),
-          insideFill:InsideEye.fill(),
+        layer.draw();
+      });
+console.log(group);
+      if(group.attrs.y>= 250)
+      group.on("dragend", (p) => {
+        // selectedColor = colorPicker.value;
 
-          
-        });
-        localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
-      } else {
-        console.log("init");
-        imagePositions.push(n.gender);
-        imagePositions.push({
-          id: this.id(),
-          x: this.x(),
-          y: this.y(),
-          round:roundEye.id(),
-          roundFill:roundEye.fill(),
-          inside:InsideEye.id(),
-          insideFill:InsideEye.fill(),
-        });
-        localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
-      }
-    });
-    layer.add(group);
+        // p.target.fill(selectedColor);
+        console.log(group.attrs); // Change fill color
+        console.log(p.target.attrs.id); // Change fill color
+        layer.draw(); // Redraw layer
+        // console.log(totalimages,p);
 
+        if (imagePositions.length) {
+          for (let i = 1; i < imagePositions.length + 1; i++) {
+            if (group.attrs.id == imagePositions[i]?.id) {
+              imagePositions.splice(i, 1);
+            }
+          }
+          imagePositions.push({
+            id: group.attrs.id,
+            x: group.attrs.x,
+            y: group.attrs.y,
+            round: roundEye.id(),
+            roundFill: roundEye.fill(),
+            roundData: roundEye.data(),
+
+            inside: InsideEye.id(),
+            insideFill: InsideEye.fill(),
+            insideData: InsideEye.data(),
+          });
+          localStorage.setItem(
+            "imagePositions",
+            JSON.stringify(imagePositions)
+          );
+        } else {
+          console.log("init");
+          imagePositions.push(n.gender);
+          imagePositions.push({
+            id: group.attrs.id,
+            x: group.attrs.x,
+            y: group.attrs.y,
+            round: roundEye.id(),
+            roundFill: roundEye.fill(),
+            roundData: roundEye.data(),
+
+            inside: InsideEye.id(),
+            insideFill: InsideEye.fill(),
+            insideData: InsideEye.data(),
+          });
+          localStorage.setItem(
+            "imagePositions",
+            JSON.stringify(imagePositions)
+          );
+        }
+        layer.draw();
+      });
+
+      // group.on("dragend", function (e) {
+      //   // Save the position of the image
+      //   //  this.scaleX;
+      //   // console.log(e);
+      //   // imagePositions.push(group)
+      //   console.log(e);
+      //   if (imagePositions.length) {
+      //     for (let i = 1; i < imagePositions.length + 1; i++) {
+      //       if (e.target.attrs.id == imagePositions[i]?.id) {
+      //         imagePositions.splice(i, 1);
+      //       }
+      //     }
+      //     imagePositions.push({
+      //       id: this.id(),
+      //       x: this.x(),
+      //       y: this.y(),
+      //       round:roundEye.id(),
+      //       roundFill:roundEye.fill(),
+      //       inside:InsideEye.id(),
+      //       insideFill:InsideEye.fill(),
+
+      //     });
+      //     localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
+      //   } else {
+      //     console.log("init");
+      //     imagePositions.push(n.gender);
+      //     imagePositions.push({
+      //       id: this.id(),
+      //       x: this.x(),
+      //       y: this.y(),
+      //       round:roundEye.id(),
+      //       roundFill:roundEye.fill(),
+      //       inside:InsideEye.id(),
+      //       insideFill:InsideEye.fill(),
+      //     });
+      //     localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
+      //   }
+      // });
+      group.on("mouseover", function () {
+        document.body.style.cursor = "pointer";
+      });
+      group.on("mouseout", function () {
+        document.body.style.cursor = "default";
+      });
+      // layer.add(group);
+
+      layer.draw();
+    })(i);
   }
-
-  layer.draw();
 
   // var svgPaths = [
 
