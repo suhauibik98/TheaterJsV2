@@ -325,7 +325,7 @@ function konva() {
             );
           }
           layer.draw();
-        }else {
+        } else {
           imagePositions = imagePositions.filter(
             (item) => item.id !== group.attrs.id
           );
@@ -335,21 +335,14 @@ function konva() {
           );
         }
       });
-      // console.log(group.attrs.y);
       group.on("dragend", (p) => {
         if (
-          group.attrs.y >= 200 &&
+          group.attrs.y >= 180 &&
           group.attrs.y <= 360 &&
           group.attrs.x >= 880 &&
           group.attrs.x <= 1100
         ) {
-          // selectedColor = colorPicker.value;
-
-          // p.target.fill(selectedColor);
-          // console.log(group.attrs); // Change fill color
-          // console.log(p.target.attrs.id); // Change fill color
-          layer.draw(); // Redraw layer
-          // console.log(totalimages,p);
+          // layer.draw(); // Redraw layer
 
           if (imagePositions.length) {
             for (let i = 1; i < imagePositions.length + 1; i++) {
@@ -405,44 +398,7 @@ function konva() {
           );
         }
       });
-      // group.on("dragend", function (e) {
-      //   // Save the position of the image
-      //   //  this.scaleX;
-      //   // console.log(e);
-      //   // imagePositions.push(group)
-      //   console.log(e);
-      //   if (imagePositions.length) {
-      //     for (let i = 1; i < imagePositions.length + 1; i++) {
-      //       if (e.target.attrs.id == imagePositions[i]?.id) {
-      //         imagePositions.splice(i, 1);
-      //       }
-      //     }
-      //     imagePositions.push({
-      //       id: this.id(),
-      //       x: this.x(),
-      //       y: this.y(),
-      //       round:roundEye.id(),
-      //       roundFill:roundEye.fill(),
-      //       inside:InsideEye.id(),
-      //       insideFill:InsideEye.fill(),
 
-      //     });
-      //     localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
-      //   } else {
-      //     console.log("init");
-      //     imagePositions.push(n.gender);
-      //     imagePositions.push({
-      //       id: this.id(),
-      //       x: this.x(),
-      //       y: this.y(),
-      //       round:roundEye.id(),
-      //       roundFill:roundEye.fill(),
-      //       inside:InsideEye.id(),
-      //       insideFill:InsideEye.fill(),
-      //     });
-      //     localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
-      //   }
-      // });
       group.on("mouseover", function () {
         document.body.style.cursor = "pointer";
       });
@@ -454,80 +410,25 @@ function konva() {
       layer.draw();
     })(i);
   }
-
-  // var svgPaths = [
-
-  //   `<svg >
-
-  //     <path data-name="layer2"
-  //     d="M63.1 30.9C62.6 30.1 50 12.5 32 12.5S1.4 30.1.9 30.9L.1 32l.8 1.1c.5.8 13.1 18.4 31.1 18.4s30.6-17.6 31.1-18.4l.8-1.1zM32 47.5C18.5 47.5 8 35.8 5 32c3-3.8 13.5-15.5 27-15.5S56 28.2 59 32c-3 3.8-13.5 15.5-27 15.5z"
-  //     fill="#000"></path>
-  //     <path id="EYECOLOR" data-name="layer1" d="M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z"
-  //     fill="#003671"></path>
-  //   </svg>`
-
-  // ];
-
-  // svgPaths.forEach((pathData, index)=> {
-  //   var path = new Konva.Path({
-  //     id:"image"+index,
-  //     x:50,
-  //     y:100,
-  //     data: pathData,
-  //     fill: 'transparent',
-  //     stroke: 'black',
-  //     strokeWidth: 0.2
-  //   });
-
-  //   // console.log(path);
-  //   if (index === 0) {
-  //     totalimages.push(path)
-  //     path.fill(selectedColor);
-  //   }
-
-  //   group.add(path);
-
-  // });
-  // function updateImageColors(color) {
-  //   // console.log(totalimages);
-  //   totalimages.forEach((image) => {
-  //     image.fill(color);
-  //     layer.batchDraw();
-  //   });
-  // }
-
   for (var i = 0; i < 10; i++) {
-    // for (var i = 0; i < 0; i++) {
-
     var image = new Konva.Image({
       id: document.getElementById("image" + i).className,
       x: i + 1 * 100,
       y: 400,
-      // width: 45,
-      //  height: 38,
-      // fill: selectedColor,
-      // stroke:"red",
+
       draggable: true,
       image: document.getElementById("image" + i),
     });
-    // console.log(image.attrs);
-
-    // image.add(path)
-
-    // console.log(image.contentDocument);
-    // totalimages.push(image)
 
     if (i == 0) {
       image.attrs.y = 265;
       image.attrs.x = 100;
 
       totalimages.push(image);
-      // console.log(image);
     }
     if (i == 1) {
       image.attrs.y = 265;
       image.attrs.x = 250;
-      // totalimages.push(image)
     }
     // smiling mouth
     if (i == 2) {
@@ -571,26 +472,46 @@ function konva() {
     image.on("dragend", function (e) {
       // Save the position of the image
       //  this.scaleX;
-      if (imagePositions.length) {
-        for (let i = 1; i < imagePositions.length + 1; i++) {
-          if (e.target.attrs.image.className == imagePositions[i]?.id) {
-            imagePositions.splice(i, 1);
+      console.log(e);
+      if (
+        e.target.attrs.y >= 200 &&
+        e.target.attrs.y <= 380 &&
+        e.target.attrs.x >= 880 &&
+        e.target.attrs.x <= 1100
+      ) {
+        if (imagePositions.length) {
+          for (let i = 1; i < imagePositions.length + 1; i++) {
+            if (e.target.attrs.image.className == imagePositions[i]?.id) {
+              imagePositions.splice(i, 1);
+            }
           }
+          imagePositions.push({
+            id: this.id(),
+            x: this.x(),
+            y: this.y(),
+          });
+          localStorage.setItem(
+            "imagePositions",
+            JSON.stringify(imagePositions)
+          );
+        } else {
+          console.log("init");
+          imagePositions.push(n.gender);
+          imagePositions.push({
+            id: this.id(),
+            x: this.x(),
+            y: this.y(),
+          });
+          localStorage.setItem(
+            "imagePositions",
+            JSON.stringify(imagePositions)
+          );
         }
-        imagePositions.push({
-          id: this.id(),
-          x: this.x(),
-          y: this.y(),
-        });
-        localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
       } else {
-        console.log("init");
-        imagePositions.push(n.gender);
-        imagePositions.push({
-          id: this.id(),
-          x: this.x(),
-          y: this.y(),
-        });
+        console.log(e);
+        imagePositions = imagePositions.filter(
+          (item) => item.id !== e.target.attrs.id
+        );
         localStorage.setItem("imagePositions", JSON.stringify(imagePositions));
       }
     });
@@ -603,20 +524,7 @@ function konva() {
 
     layer.add(image);
   }
-  // var path = new Konva.Path({
-  //   x: 50,
-  //   y: 40,
-  // data:"M32 19.5a12 12 0 1 0 12 12 12 12 0 0 0-12-12zm0 18a6 6 0 0 1-5.2-9 2 2 0 0 1 3.5 2 2 2 0 0 0-.3 1 2 2 0 0 0 2 2 2 2 0 1 1 0 4z",
-  //   fill: selectedColor,
-  //   draggable:true,
-  //   scaleX: 1.5,
-  //   scaleY: 1.5,
-  // });
 
-  // totalimages.push(path)
-  // layer.add(path)
-
-  // Create one image in the center
   var centerImage = new Konva.Image({
     x: 820,
     y: 200,
